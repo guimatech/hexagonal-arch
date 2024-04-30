@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @SpringBootTest
-public class CustomerControllerTest {
+class CustomerControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -34,7 +34,7 @@ public class CustomerControllerTest {
 
     @Test
     @DisplayName("Deve criar um cliente")
-    public void testCreate() throws Exception {
+    void testCreate() throws Exception {
 
         var customer = new CustomerDTO();
         customer.setCpf("12345678901");
@@ -59,7 +59,7 @@ public class CustomerControllerTest {
 
     @Test
     @DisplayName("Não deve cadastrar um cliente com CPF duplicado")
-    public void testCreateWithDuplicatedCPFShouldFail() throws Exception {
+    void testCreateWithDuplicatedCPFShouldFail() throws Exception {
 
         var customer = new CustomerDTO();
         customer.setCpf("12345678901");
@@ -91,7 +91,7 @@ public class CustomerControllerTest {
 
     @Test
     @DisplayName("Não deve cadastrar um cliente com e-mail duplicado")
-    public void testCreateWithDuplicatedEmailShouldFail() throws Exception {
+    void testCreateWithDuplicatedEmailShouldFail() throws Exception {
 
         var customer = new CustomerDTO();
         customer.setCpf("12345618901");
@@ -123,7 +123,7 @@ public class CustomerControllerTest {
 
     @Test
     @DisplayName("Deve obter um cliente por id")
-    public void testGet() throws Exception {
+    void testGet() throws Exception {
 
         var customer = new CustomerDTO();
         customer.setCpf("12345678901");

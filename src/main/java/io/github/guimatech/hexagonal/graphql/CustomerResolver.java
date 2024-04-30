@@ -1,13 +1,14 @@
 package io.github.guimatech.hexagonal.graphql;
 
+import io.github.guimatech.hexagonal.application.usecases.CreateCustomerUseCase;
 import io.github.guimatech.hexagonal.dtos.CustomerDTO;
-import io.github.guimatech.hexagonal.models.Customer;
 import io.github.guimatech.hexagonal.services.CustomerService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+// Adapter [Hexagonal Architecture]
 @Controller
 public class CustomerResolver {
 
@@ -18,22 +19,9 @@ public class CustomerResolver {
     }
 
     @MutationMapping
-    public CustomerDTO createCustomer(@Argument CustomerDTO input) {
-        if (customerService.findByCpf(input.getCpf()).isPresent()) {
-            throw new RuntimeException("Customer already exists");
-        }
-        if (customerService.findByEmail(input.getEmail()).isPresent()) {
-            throw new RuntimeException("Customer already exists");
-        }
-
-        var customer = new Customer();
-        customer.setName(input.getName());
-        customer.setCpf(input.getCpf());
-        customer.setEmail(input.getEmail());
-
-        customer = customerService.save(customer);
-
-        return new CustomerDTO(customer);
+    public CreateCustomerUseCase.Output createCustomer(@Argument CustomerDTO input) {
+        final var useCase = new CreateCustomerUseCase(customerService);
+        return useCase.execute(new CreateCustomerUseCase.Input(input.getCpf(), input.getName(), input.getEmail()));
     }
 
     @QueryMapping

@@ -1,5 +1,6 @@
 package io.github.guimatech.hexagonal.controllers;
 
+import io.github.guimatech.hexagonal.application.usecases.CreateCustomerUseCase;
 import io.github.guimatech.hexagonal.dtos.CustomerDTO;
 import io.github.guimatech.hexagonal.models.Customer;
 import io.github.guimatech.hexagonal.services.CustomerService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
+// Adapter [Hexagonal Architecture]
 @RestController
 @RequestMapping(value = "customers")
 public class CustomerController {
@@ -18,21 +20,13 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CustomerDTO dto) {
-        if (customerService.findByCpf(dto.getCpf()).isPresent()) {
-            return ResponseEntity.unprocessableEntity().body("Customer already exists");
+        try {
+            final var useCase = new CreateCustomerUseCase(customerService);
+            final var output = useCase.execute(new CreateCustomerUseCase.Input(dto.getCpf(), dto.getEmail(), dto.getName()));
+            return ResponseEntity.created(URI.create("/customers/" + output.id())).body(output);
+        } catch (Exception ex) {
+            return ResponseEntity.unprocessableEntity().body(ex.getMessage());
         }
-        if (customerService.findByEmail(dto.getEmail()).isPresent()) {
-            return ResponseEntity.unprocessableEntity().body("Customer already exists");
-        }
-
-        var customer = new Customer();
-        customer.setName(dto.getName());
-        customer.setCpf(dto.getCpf());
-        customer.setEmail(dto.getEmail());
-
-        customer = customerService.save(customer);
-
-        return ResponseEntity.created(URI.create("/customers/" + customer.getId())).body(customer);
     }
 
     @GetMapping("/{id}")
