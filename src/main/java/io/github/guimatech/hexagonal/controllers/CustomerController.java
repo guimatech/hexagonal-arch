@@ -1,8 +1,8 @@
 package io.github.guimatech.hexagonal.controllers;
 
 import io.github.guimatech.hexagonal.application.usecases.CreateCustomerUseCase;
+import io.github.guimatech.hexagonal.application.usecases.GetCustomerByIdUseCase;
 import io.github.guimatech.hexagonal.dtos.CustomerDTO;
-import io.github.guimatech.hexagonal.models.Customer;
 import io.github.guimatech.hexagonal.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +31,9 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id) {
-        var customer = customerService.findById(id);
-        if (customer.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(customer.get());
+        final var useCase = new GetCustomerByIdUseCase(customerService);
+        return useCase.execute(new GetCustomerByIdUseCase.Input(id))
+                .map(ResponseEntity::ok)
+                .orElseGet(ResponseEntity.notFound()::build);
     }
 }

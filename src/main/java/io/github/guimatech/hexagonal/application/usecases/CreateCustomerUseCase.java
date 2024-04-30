@@ -5,13 +5,15 @@ import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
 import io.github.guimatech.hexagonal.models.Customer;
 import io.github.guimatech.hexagonal.services.CustomerService;
 
+import java.util.Objects;
+
 public class CreateCustomerUseCase
         extends UseCase<CreateCustomerUseCase.Input, CreateCustomerUseCase.Output> {
 
     private final CustomerService customerService;
 
     public CreateCustomerUseCase(CustomerService customerService) {
-        this.customerService = customerService;
+        this.customerService = Objects.requireNonNull(customerService);
     }
 
     @Override
