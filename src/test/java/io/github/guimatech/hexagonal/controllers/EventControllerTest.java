@@ -1,5 +1,6 @@
 package io.github.guimatech.hexagonal.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.guimatech.hexagonal.dtos.EventDTO;
 import io.github.guimatech.hexagonal.dtos.PartnerDTO;
 import io.github.guimatech.hexagonal.dtos.SubscribeDTO;
@@ -8,8 +9,11 @@ import io.github.guimatech.hexagonal.models.Partner;
 import io.github.guimatech.hexagonal.repositories.CustomerRepository;
 import io.github.guimatech.hexagonal.repositories.EventRepository;
 import io.github.guimatech.hexagonal.repositories.PartnerRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -58,7 +62,7 @@ class EventControllerTest {
 
     @Test
     @DisplayName("Deve criar um evento")
-    public void testCreate() throws Exception {
+    void testCreate() throws Exception {
 
         var event = new EventDTO();
         event.setDate("2021-01-01");
@@ -84,7 +88,7 @@ class EventControllerTest {
     @Test
     @Transactional
     @DisplayName("Deve comprar um ticket de um evento")
-    public void testReserveTicket() throws Exception {
+    void testReserveTicket() throws Exception {
 
         var event = new EventDTO();
         event.setDate("2021-01-01");

@@ -12,7 +12,7 @@ import java.util.UUID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-class CreateCustomerTest {
+class CreateCustomerUseCaseTest {
 
     @Test
     @DisplayName("Deve criar um cliente")

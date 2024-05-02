@@ -1,9 +1,12 @@
 package io.github.guimatech.hexagonal.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.guimatech.hexagonal.dtos.PartnerDTO;
 import io.github.guimatech.hexagonal.repositories.PartnerRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @SpringBootTest
-public class PartnerControllerTest {
+class PartnerControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -34,7 +37,7 @@ public class PartnerControllerTest {
 
     @Test
     @DisplayName("Deve criar um parceiro")
-    public void testCreate() throws Exception {
+    void testCreate() throws Exception {
 
         var partner = new PartnerDTO();
         partner.setCnpj("41536538000100");
@@ -59,7 +62,7 @@ public class PartnerControllerTest {
 
     @Test
     @DisplayName("Não deve cadastrar um parceiro com CNPJ duplicado")
-    public void testCreateWithDuplicatedCPFShouldFail() throws Exception {
+    void testCreateWithDuplicatedCPFShouldFail() throws Exception {
 
         var partner = new PartnerDTO();
         partner.setCnpj("41536538000100");
@@ -91,7 +94,7 @@ public class PartnerControllerTest {
 
     @Test
     @DisplayName("Não deve cadastrar um parceiro com e-mail duplicado")
-    public void testCreateWithDuplicatedEmailShouldFail() throws Exception {
+    void testCreateWithDuplicatedEmailShouldFail() throws Exception {
 
         var partner = new PartnerDTO();
         partner.setCnpj("41536538000100");
@@ -123,7 +126,7 @@ public class PartnerControllerTest {
 
     @Test
     @DisplayName("Deve obter um parceiro por id")
-    public void testGet() throws Exception {
+    void testGet() throws Exception {
 
         var partner = new PartnerDTO();
         partner.setCnpj("41536538000100");
