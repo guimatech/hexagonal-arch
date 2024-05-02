@@ -2,7 +2,6 @@ package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
 import io.github.guimatech.hexagonal.services.CustomerService;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
 import java.util.Optional;
