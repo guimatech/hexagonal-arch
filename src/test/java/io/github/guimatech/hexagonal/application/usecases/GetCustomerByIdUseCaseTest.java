@@ -1,20 +1,15 @@
 package io.github.guimatech.hexagonal.application.usecases;
 
-import io.github.guimatech.hexagonal.dtos.CustomerDTO;
-import io.github.guimatech.hexagonal.models.Customer;
-import io.github.guimatech.hexagonal.services.CustomerService;
+import io.github.guimatech.hexagonal.infraestructure.models.Customer;
+import io.github.guimatech.hexagonal.infraestructure.services.CustomerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class GetCustomerByIdUseCaseTest {

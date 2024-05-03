@@ -2,11 +2,13 @@ package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
 import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
-import io.github.guimatech.hexagonal.models.Customer;
-import io.github.guimatech.hexagonal.services.CustomerService;
+import io.github.guimatech.hexagonal.infraestructure.models.Customer;
+import io.github.guimatech.hexagonal.infraestructure.services.CustomerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class CreateCustomerUseCase
         extends UseCase<CreateCustomerUseCase.Input, CreateCustomerUseCase.Output> {
 

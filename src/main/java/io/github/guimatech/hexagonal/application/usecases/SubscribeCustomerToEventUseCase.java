@@ -2,15 +2,18 @@ package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
 import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
-import io.github.guimatech.hexagonal.models.Ticket;
-import io.github.guimatech.hexagonal.models.TicketStatus;
-import io.github.guimatech.hexagonal.services.CustomerService;
-import io.github.guimatech.hexagonal.services.EventService;
+import io.github.guimatech.hexagonal.infraestructure.models.Ticket;
+import io.github.guimatech.hexagonal.infraestructure.models.TicketStatus;
+import io.github.guimatech.hexagonal.infraestructure.services.CustomerService;
+import io.github.guimatech.hexagonal.infraestructure.services.EventService;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Objects;
 
-public class SubscribeCustomerToEventUseCase extends UseCase<SubscribeCustomerToEventUseCase.Input, SubscribeCustomerToEventUseCase.Output> {
+@Service
+public class SubscribeCustomerToEventUseCase
+        extends UseCase<SubscribeCustomerToEventUseCase.Input, SubscribeCustomerToEventUseCase.Output> {
 
     private final CustomerService customerService;
     private final EventService eventService;

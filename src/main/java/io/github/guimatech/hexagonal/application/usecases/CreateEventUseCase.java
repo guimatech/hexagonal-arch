@@ -2,15 +2,18 @@ package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
 import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
-import io.github.guimatech.hexagonal.models.Event;
-import io.github.guimatech.hexagonal.services.EventService;
-import io.github.guimatech.hexagonal.services.PartnerService;
+import io.github.guimatech.hexagonal.infraestructure.models.Event;
+import io.github.guimatech.hexagonal.infraestructure.services.EventService;
+import io.github.guimatech.hexagonal.infraestructure.services.PartnerService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class CreateEventUseCase extends UseCase<CreateEventUseCase.Input, CreateEventUseCase.Output> {
+@Service
+public class CreateEventUseCase
+        extends UseCase<CreateEventUseCase.Input, CreateEventUseCase.Output> {
 
     private final EventService eventService;
     private final PartnerService partnerService;

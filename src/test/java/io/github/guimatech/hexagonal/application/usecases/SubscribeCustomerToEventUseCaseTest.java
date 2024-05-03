@@ -1,11 +1,11 @@
 package io.github.guimatech.hexagonal.application.usecases;
 
-import io.github.guimatech.hexagonal.models.Customer;
-import io.github.guimatech.hexagonal.models.Event;
-import io.github.guimatech.hexagonal.models.Ticket;
-import io.github.guimatech.hexagonal.models.TicketStatus;
-import io.github.guimatech.hexagonal.services.CustomerService;
-import io.github.guimatech.hexagonal.services.EventService;
+import io.github.guimatech.hexagonal.infraestructure.models.Customer;
+import io.github.guimatech.hexagonal.infraestructure.models.Event;
+import io.github.guimatech.hexagonal.infraestructure.models.Ticket;
+import io.github.guimatech.hexagonal.infraestructure.models.TicketStatus;
+import io.github.guimatech.hexagonal.infraestructure.services.CustomerService;
+import io.github.guimatech.hexagonal.infraestructure.services.EventService;
 import io.hypersistence.tsid.TSID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

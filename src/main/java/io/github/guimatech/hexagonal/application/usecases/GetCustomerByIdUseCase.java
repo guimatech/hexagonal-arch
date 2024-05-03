@@ -1,12 +1,15 @@
 package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
-import io.github.guimatech.hexagonal.services.CustomerService;
+import io.github.guimatech.hexagonal.infraestructure.services.CustomerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Optional;
 
-public class GetCustomerByIdUseCase extends UseCase<GetCustomerByIdUseCase.Input, Optional<GetCustomerByIdUseCase.Output>> {
+@Service
+public class GetCustomerByIdUseCase
+        extends UseCase<GetCustomerByIdUseCase.Input, Optional<GetCustomerByIdUseCase.Output>> {
 
     private final CustomerService customerService;
 

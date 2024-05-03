@@ -1,7 +1,7 @@
 package io.github.guimatech.hexagonal.application.usecases;
 
-import io.github.guimatech.hexagonal.models.Partner;
-import io.github.guimatech.hexagonal.services.PartnerService;
+import io.github.guimatech.hexagonal.infraestructure.models.Partner;
+import io.github.guimatech.hexagonal.infraestructure.services.PartnerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
