@@ -6,12 +6,10 @@ import io.github.guimatech.hexagonal.infraestructure.models.Ticket;
 import io.github.guimatech.hexagonal.infraestructure.models.TicketStatus;
 import io.github.guimatech.hexagonal.infraestructure.services.CustomerService;
 import io.github.guimatech.hexagonal.infraestructure.services.EventService;
-import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Objects;
 
-@Service
 public class SubscribeCustomerToEventUseCase
         extends UseCase<SubscribeCustomerToEventUseCase.Input, SubscribeCustomerToEventUseCase.Output> {
 

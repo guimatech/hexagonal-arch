@@ -2,11 +2,9 @@ package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
 import io.github.guimatech.hexagonal.infraestructure.services.PartnerService;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
 public class GetPartnerByIdUseCase
         extends UseCase<GetPartnerByIdUseCase.Input, Optional<GetPartnerByIdUseCase.Output>> {
 

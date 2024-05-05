@@ -4,11 +4,9 @@ import io.github.guimatech.hexagonal.application.UseCase;
 import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
 import io.github.guimatech.hexagonal.infraestructure.models.Partner;
 import io.github.guimatech.hexagonal.infraestructure.services.PartnerService;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Service
 public class CreatePartnerUseCase
         extends UseCase<CreatePartnerUseCase.Input, CreatePartnerUseCase.Output> {
 

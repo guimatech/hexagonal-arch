@@ -5,13 +5,11 @@ import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
 import io.github.guimatech.hexagonal.infraestructure.models.Event;
 import io.github.guimatech.hexagonal.infraestructure.services.EventService;
 import io.github.guimatech.hexagonal.infraestructure.services.PartnerService;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-@Service
 public class CreateEventUseCase
         extends UseCase<CreateEventUseCase.Input, CreateEventUseCase.Output> {
 
