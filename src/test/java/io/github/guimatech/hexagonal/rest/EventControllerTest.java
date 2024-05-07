@@ -2,6 +2,7 @@ package io.github.guimatech.hexagonal.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.guimatech.hexagonal.application.usecases.CreateCustomerUseCase;
+import io.github.guimatech.hexagonal.application.usecases.CreateEventUseCase;
 import io.github.guimatech.hexagonal.infraestructure.dtos.NewEventDTO;
 import io.github.guimatech.hexagonal.infraestructure.dtos.SubscribeDTO;
 import io.github.guimatech.hexagonal.infraestructure.models.Customer;
@@ -105,7 +106,7 @@ class EventControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andReturn().getResponse().getContentAsByteArray();
 
-        var eventId = mapper.readValue(createResult, CreateCustomerUseCase.Output.class).id();
+        var eventId = mapper.readValue(createResult, CreateEventUseCase.Output.class).id();
 
         var sub = new SubscribeDTO(johnDoe.getId(), null);
 

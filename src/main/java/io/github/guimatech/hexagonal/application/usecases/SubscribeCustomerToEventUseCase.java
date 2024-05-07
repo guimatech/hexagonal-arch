@@ -22,7 +22,7 @@ public class SubscribeCustomerToEventUseCase
     }
 
     @Override
-    public Output execute(Input input) {
+    public Output execute(final Input input) {
         var customer = customerService.findById(input.customerId())
                 .orElseThrow(() -> new ValidationException("Customer not found"));
 

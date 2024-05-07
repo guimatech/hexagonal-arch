@@ -1,26 +1,30 @@
 package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
-import io.github.guimatech.hexagonal.infraestructure.services.PartnerService;
+import io.github.guimatech.hexagonal.application.entities.PartnerId;
+import io.github.guimatech.hexagonal.application.repositories.PartnerRepository;
 
 import java.util.Optional;
 
 public class GetPartnerByIdUseCase
         extends UseCase<GetPartnerByIdUseCase.Input, Optional<GetPartnerByIdUseCase.Output>> {
 
-    private final PartnerService partnerService;
+    private final PartnerRepository partnerRepository;
 
-    public GetPartnerByIdUseCase(PartnerService partnerService) {
-        this.partnerService = partnerService;
+    public GetPartnerByIdUseCase(final PartnerRepository partnerRepository) {
+        this.partnerRepository = partnerRepository;
     }
 
     @Override
-    public Optional<Output> execute(Input input) {
-        return partnerService.findById(input.id)
-                .map(partner -> new Output(partner.getId(), partner.getCnpj(), partner.getEmail(), partner.getName()));
+    public Optional<Output> execute(final Input input) {
+        return partnerRepository.partnerOfId(PartnerId.with(input.id))
+                .map(partner -> new Output(partner.partnerId().value().toString(),
+                        partner.cnpj().value(),
+                        partner.email().value(),
+                        partner.name().value()));
     }
 
-    public record Input(Long id) {}
+    public record Input(String id) {}
 
-    public record Output(Long id, String cnpj, String email, String name) {}
+    public record Output(String id, String cnpj, String email, String name) {}
 }

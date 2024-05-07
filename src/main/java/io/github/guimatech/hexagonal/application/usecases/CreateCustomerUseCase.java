@@ -1,41 +1,40 @@
 package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
+import io.github.guimatech.hexagonal.application.entities.Customer;
 import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
-import io.github.guimatech.hexagonal.infraestructure.models.Customer;
-import io.github.guimatech.hexagonal.infraestructure.services.CustomerService;
+import io.github.guimatech.hexagonal.application.repositories.CustomerRepository;
 
 import java.util.Objects;
 
 public class CreateCustomerUseCase
         extends UseCase<CreateCustomerUseCase.Input, CreateCustomerUseCase.Output> {
 
-    private final CustomerService customerService;
+    private final CustomerRepository customerRepository;
 
-    public CreateCustomerUseCase(CustomerService customerService) {
-        this.customerService = Objects.requireNonNull(customerService);
+    public CreateCustomerUseCase(CustomerRepository customerRepository) {
+        this.customerRepository = Objects.requireNonNull(customerRepository);
     }
 
     @Override
-    public Output execute(Input input) {
-        if (customerService.findByCpf(input.cpf).isPresent()) {
+    public Output execute(final Input input) {
+        if (customerRepository.customerOfCpf(input.cpf).isPresent()) {
             throw new ValidationException("Customer already exists");
         }
-        if (customerService.findByEmail(input.email).isPresent()) {
+        if (customerRepository.customerOfEmail(input.email).isPresent()) {
             throw new ValidationException("Customer already exists");
         }
 
-        var customer = new Customer();
-        customer.setName(input.name);
-        customer.setCpf(input.cpf);
-        customer.setEmail(input.email);
+        var customer = customerRepository.create(Customer.newCustomer(input.name, input.cpf, input.email));
 
-        customer = customerService.save(customer);
-
-        return new Output(customer.getId(), customer.getCpf(), customer.getEmail(), customer.getName());
+        return new Output(
+                customer.customerId().value().toString(),
+                customer.cpf().value(),
+                customer.email().value(),
+                customer.name().value());
     }
 
     public record Input(String cpf, String email, String name) {}
 
-    public record Output(Long id, String cpf, String email, String name) {}
+    public record Output(String id, String cpf, String email, String name) {}
 }
