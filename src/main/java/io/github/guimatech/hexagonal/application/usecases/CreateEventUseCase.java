@@ -1,44 +1,43 @@
 package io.github.guimatech.hexagonal.application.usecases;
 
 import io.github.guimatech.hexagonal.application.UseCase;
+import io.github.guimatech.hexagonal.application.entities.Event;
+import io.github.guimatech.hexagonal.application.entities.PartnerId;
 import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
-import io.github.guimatech.hexagonal.infraestructure.models.Event;
-import io.github.guimatech.hexagonal.infraestructure.services.EventService;
-import io.github.guimatech.hexagonal.infraestructure.services.PartnerService;
+import io.github.guimatech.hexagonal.application.repositories.EventRepository;
+import io.github.guimatech.hexagonal.application.repositories.PartnerRepository;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class CreateEventUseCase
         extends UseCase<CreateEventUseCase.Input, CreateEventUseCase.Output> {
 
-    private final EventService eventService;
-    private final PartnerService partnerService;
+    private final EventRepository eventRepository;
+    private final PartnerRepository partnerRepository;
 
-    public CreateEventUseCase(final EventService eventService, final PartnerService partnerService) {
-        this.eventService = Objects.requireNonNull(eventService);
-        this.partnerService = Objects.requireNonNull(partnerService);
+    public CreateEventUseCase(final EventRepository eventRepository, final PartnerRepository partnerRepository) {
+        this.eventRepository = Objects.requireNonNull(eventRepository);
+        this.partnerRepository = Objects.requireNonNull(partnerRepository);
     }
 
     public Output execute(final Input input) {
-        final var event = new Event();
-        event.setDate(LocalDate.parse(input.date(), DateTimeFormatter.ISO_DATE));
-        event.setName(input.name());
-        event.setTotalSpots(input.totalSpots());
+        final var aPartner = partnerRepository.partnerOfId(PartnerId.with(input.partnerId))
+                .orElseThrow(() -> new ValidationException("Partner not found"));
 
-        partnerService.findById(input.partnerId())
-                .ifPresentOrElse(event::setPartner, () -> {
-                    throw new ValidationException("Partner not found");
-                });
+        final var anEvent =
+                eventRepository.create(Event.newEvent(input.date(), input.name(), input.totalSpots(), aPartner));
 
-        final var createdEvent = eventService.save(event);
-        return new Output(createdEvent.getId(), input.date, createdEvent.getName(), input.totalSpots, input.partnerId);
+        return new Output(
+                anEvent.eventId().value(),
+                input.date,
+                anEvent.name().value(),
+                anEvent.totalSpots(),
+                anEvent.partnerId().value());
     }
 
-    public record Input(String date, String name, Long partnerId, Integer totalSpots) {
+    public record Input(String date, String name, String partnerId, Integer totalSpots) {
     }
 
-    public record Output(Long id, String date, String name, int totalSpots, Long partnerId) {
+    public record Output(String id, String date, String name, int totalSpots, String partnerId) {
     }
 }

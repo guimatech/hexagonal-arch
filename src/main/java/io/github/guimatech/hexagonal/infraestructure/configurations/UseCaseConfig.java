@@ -8,7 +8,6 @@ import io.github.guimatech.hexagonal.application.usecases.GetPartnerByIdUseCase;
 import io.github.guimatech.hexagonal.application.usecases.SubscribeCustomerToEventUseCase;
 import io.github.guimatech.hexagonal.infraestructure.services.CustomerService;
 import io.github.guimatech.hexagonal.infraestructure.services.EventService;
-import io.github.guimatech.hexagonal.infraestructure.services.PartnerService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,16 +18,13 @@ public class UseCaseConfig {
 
     private final CustomerService customerService;
     private final EventService eventService;
-    private final PartnerService partnerService;
 
     public UseCaseConfig(
             final CustomerService customerService,
-            final EventService eventService,
-            final PartnerService partnerService
+            final EventService eventService
     ) {
         this.customerService = Objects.requireNonNull(customerService);
         this.eventService = Objects.requireNonNull(eventService);
-        this.partnerService = Objects.requireNonNull(partnerService);
     }
 
     @Bean
@@ -39,7 +35,7 @@ public class UseCaseConfig {
 
     @Bean
     public CreateEventUseCase createEventUseCase() {
-        return new CreateEventUseCase(eventService, partnerService);
+        return new CreateEventUseCase(null, null);
     }
 
     @Bean

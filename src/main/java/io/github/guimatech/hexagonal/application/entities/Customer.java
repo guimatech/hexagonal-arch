@@ -3,9 +3,9 @@ package io.github.guimatech.hexagonal.application.entities;
 public class Customer {
 
     private final CustomerId customerId;
-    private final Name name;
-    private final Cpf cpf;
-    private final Email email;
+    private Name name;
+    private Cpf cpf;
+    private Email email;
 
     public Customer(final CustomerId customerId, final String name, final String cpf, final String email) {
         this.customerId = customerId;

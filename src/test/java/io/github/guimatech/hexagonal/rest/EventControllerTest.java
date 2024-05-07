@@ -1,7 +1,6 @@
 package io.github.guimatech.hexagonal.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.guimatech.hexagonal.application.usecases.CreateCustomerUseCase;
 import io.github.guimatech.hexagonal.application.usecases.CreateEventUseCase;
 import io.github.guimatech.hexagonal.infraestructure.dtos.NewEventDTO;
 import io.github.guimatech.hexagonal.infraestructure.dtos.SubscribeDTO;

@@ -18,7 +18,7 @@ public class GetPartnerByIdUseCase
     @Override
     public Optional<Output> execute(final Input input) {
         return partnerRepository.partnerOfId(PartnerId.with(input.id))
-                .map(partner -> new Output(partner.partnerId().value().toString(),
+                .map(partner -> new Output(partner.partnerId().value(),
                         partner.cnpj().value(),
                         partner.email().value(),
                         partner.name().value()));
