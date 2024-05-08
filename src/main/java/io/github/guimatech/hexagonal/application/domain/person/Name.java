@@ -7,7 +7,7 @@ import java.util.Objects;
 public record Name(String value) {
     public Name {
         if (Objects.isNull(value) || value.isBlank()) {
-            throw new ValidationException("Invalid value for name");
+            throw new ValidationException("Invalid value for Name");
         }
     }
 }

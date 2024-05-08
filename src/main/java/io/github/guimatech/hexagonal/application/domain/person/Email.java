@@ -8,7 +8,7 @@ public record Email(String value) {
 
     public Email {
         if (Objects.isNull(value) || !value.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")) {
-            throw new ValidationException("Invalid value for email");
+            throw new ValidationException("Invalid value for Email");
         }
     }
 }

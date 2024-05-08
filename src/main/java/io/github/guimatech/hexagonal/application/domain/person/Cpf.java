@@ -8,7 +8,7 @@ public record Cpf(String value) {
 
     public Cpf {
         if (Objects.isNull(value) || !value.matches("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$")) {
-            throw new ValidationException("Invalid value for CPF");
+            throw new ValidationException("Invalid value for Cpf");
         }
     }
 }
