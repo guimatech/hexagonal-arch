@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CreatePartnerUseCaseTest {
+class CreatePartnerUseCaseTest {
 
     @Test
     @DisplayName("Deve criar um parceiro")
-    public void testCreatePartner() {
+    void testCreatePartner() {
         // given
         final var expectedCNPJ = "41.536.538/0001-00";
         final var expectedEmail = "john.doe@gmail.com";
@@ -33,7 +33,7 @@ public class CreatePartnerUseCaseTest {
 
     @Test
     @DisplayName("Não deve cadastrar um parceiro com CNPJ duplicado")
-    public void testCreateWithDuplicatedCNPJShouldFail() throws Exception {
+    void testCreateWithDuplicatedCNPJShouldFail() throws Exception {
         // given
         final var expectedCNPJ = "41.536.538/0001-00";
         final var expectedEmail = "john.doe@gmail.com";
@@ -57,7 +57,7 @@ public class CreatePartnerUseCaseTest {
 
     @Test
     @DisplayName("Não deve cadastrar um parceiro com e-mail duplicado")
-    public void testCreateWithDuplicatedEmailShouldFail() throws Exception {
+    void testCreateWithDuplicatedEmailShouldFail() throws Exception {
         // given
         final var expectedCNPJ = "41.536.538/0001-00";
         final var expectedEmail = "john.doe@gmail.com";

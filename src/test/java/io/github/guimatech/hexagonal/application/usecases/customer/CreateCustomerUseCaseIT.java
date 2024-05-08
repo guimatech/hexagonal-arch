@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CreateCustomerUseCaseIT extends IntegrationTest {
+class CreateCustomerUseCaseIT extends IntegrationTest {
 
     @Autowired
     private CreateCustomerUseCase useCase;
@@ -25,7 +25,7 @@ public class CreateCustomerUseCaseIT extends IntegrationTest {
 
     @Test
     @DisplayName("Deve criar um cliente")
-    public void testCreateCustomer() {
+    void testCreateCustomer() {
         // given
         final var expectedCPF = "123.456.789-01";
         final var expectedEmail = "john.doe@gmail.com";
@@ -45,7 +45,7 @@ public class CreateCustomerUseCaseIT extends IntegrationTest {
 
     @Test
     @DisplayName("Não deve cadastrar um cliente com CPF duplicado")
-    public void testCreateWithDuplicatedCPFShouldFail() throws Exception {
+    void testCreateWithDuplicatedCPFShouldFail() throws Exception {
         // given
         final var expectedCPF = "123.456.789-01";
         final var expectedEmail = "john.doe@gmail.com";
@@ -65,7 +65,7 @@ public class CreateCustomerUseCaseIT extends IntegrationTest {
 
     @Test
     @DisplayName("Não deve cadastrar um cliente com e-mail duplicado")
-    public void testCreateWithDuplicatedEmailShouldFail() throws Exception {
+    void testCreateWithDuplicatedEmailShouldFail() throws Exception {
         // given
         final var expectedCPF = "123.456.789-01";
         final var expectedEmail = "john.doe@gmail.com";

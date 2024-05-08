@@ -13,7 +13,7 @@ class CreateEventUseCaseTest {
 
     @Test
     @DisplayName("Deve criar um evento")
-    public void testCreate() throws Exception {
+    void testCreate() throws Exception {
         // given
         final var aPartner =
                 Partner.newPartner("John Doe", "41.536.538/0001-00", "john.doe@gmail.com");
@@ -44,7 +44,7 @@ class CreateEventUseCaseTest {
 
     @Test
     @DisplayName("Não deve criar um evento quando o Partner não for encontrado")
-    public void testCreateEvent_whenPartnerDoesntExists_ShouldThrowError() throws Exception {
+    void testCreateEvent_whenPartnerDoesntExists_ShouldThrowError() throws Exception {
         // given
         final var expectedDate = "2021-01-01";
         final var expectedName = "Disney on Ice";

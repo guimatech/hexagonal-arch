@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @SpringBootTest
-public class PartnerControllerTest {
+class PartnerControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -39,7 +39,7 @@ public class PartnerControllerTest {
 
     @Test
     @DisplayName("Deve criar um parceiro")
-    public void testCreate() throws Exception {
+    void testCreate() throws Exception {
 
         var partner = new NewPartnerDTO("John Doe", "41.536.538/0001-00", "john.doe@gmail.com");
 
@@ -61,7 +61,7 @@ public class PartnerControllerTest {
 
     @Test
     @DisplayName("Não deve cadastrar um parceiro com CNPJ duplicado")
-    public void testCreateWithDuplicatedCPFShouldFail() throws Exception {
+    void testCreateWithDuplicatedCPFShouldFail() throws Exception {
 
         var partner = new NewPartnerDTO("John Doe", "41.536.538/0001-00", "john.doe@gmail.com");
 
@@ -90,7 +90,7 @@ public class PartnerControllerTest {
 
     @Test
     @DisplayName("Não deve cadastrar um parceiro com e-mail duplicado")
-    public void testCreateWithDuplicatedEmailShouldFail() throws Exception {
+    void testCreateWithDuplicatedEmailShouldFail() throws Exception {
 
         var partner = new NewPartnerDTO("John Doe", "41.536.538/0001-00", "john.doe@gmail.com");
 
@@ -119,7 +119,7 @@ public class PartnerControllerTest {
 
     @Test
     @DisplayName("Deve obter um parceiro por id")
-    public void testGet() throws Exception {
+    void testGet() throws Exception {
 
         var partner = new NewPartnerDTO("John Doe", "41.536.538/0001-00", "john.doe@gmail.com");
 

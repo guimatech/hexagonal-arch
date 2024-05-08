@@ -18,7 +18,7 @@ class SubscribeCustomerToEventUseCaseTest {
 
     @Test
     @DisplayName("Deve comprar um ticket de um evento")
-    public void testReserveTicket() throws Exception {
+    void testReserveTicket() throws Exception {
         // given
         final var expectedTicketsSize = 1;
 
@@ -55,7 +55,7 @@ class SubscribeCustomerToEventUseCaseTest {
 
     @Test
     @DisplayName("Não deve comprar um ticket com um cliente não existente")
-    public void testReserveTicketWithoutCustomer() throws Exception {
+    void testReserveTicketWithoutCustomer() throws Exception {
         // given
         final var expectedError = "Customer not found";
 
@@ -84,7 +84,7 @@ class SubscribeCustomerToEventUseCaseTest {
 
     @Test
     @DisplayName("Não deve comprar um ticket de um evento que não existe")
-    public void testReserveTicketWithoutEvent() throws Exception {
+    void testReserveTicketWithoutEvent() throws Exception {
         // given
         final var expectedError = "Event not found";
 
@@ -112,7 +112,7 @@ class SubscribeCustomerToEventUseCaseTest {
 
     @Test
     @DisplayName("Um mesmo cliente não pode comprar mais de um ticket por evento")
-    public void testReserveTicketMoreThanOnce() throws Exception {
+    void testReserveTicketMoreThanOnce() throws Exception {
         // given
         final var expectedError = "Email already registered";
 
@@ -146,7 +146,7 @@ class SubscribeCustomerToEventUseCaseTest {
 
     @Test
     @DisplayName("Um mesmo cliente não pode comprar de um evento que não há mais cadeiras")
-    public void testReserveTicketWithoutSlots() throws Exception {
+    void testReserveTicketWithoutSlots() throws Exception {
         // given
         final var expectedError = "Event sold out";
 

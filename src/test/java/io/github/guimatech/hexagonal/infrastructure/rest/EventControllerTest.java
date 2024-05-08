@@ -59,7 +59,7 @@ class EventControllerTest {
 
     @Test
     @DisplayName("Deve criar um evento")
-    public void testCreate() throws Exception {
+    void testCreate() throws Exception {
 
         var event = new NewEventDTO("Disney on Ice", "2021-01-01", 100, disney.partnerId().value());
 
@@ -81,7 +81,7 @@ class EventControllerTest {
     @Test
     @Transactional
     @DisplayName("Deve comprar um ticket de um evento")
-    public void testReserveTicket() throws Exception {
+    void testReserveTicket() throws Exception {
 
         var event = new NewEventDTO("Disney on Ice", "2021-01-01", 100, disney.partnerId().value());
 

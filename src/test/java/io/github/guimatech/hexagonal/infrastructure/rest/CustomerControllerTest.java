@@ -39,7 +39,7 @@ class CustomerControllerTest {
 
     @Test
     @DisplayName("Deve criar um cliente")
-    public void testCreate() throws Exception {
+    void testCreate() throws Exception {
 
         var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
 
@@ -61,7 +61,7 @@ class CustomerControllerTest {
 
     @Test
     @DisplayName("Não deve cadastrar um cliente com CPF duplicado")
-    public void testCreateWithDuplicatedCPFShouldFail() throws Exception {
+    void testCreateWithDuplicatedCPFShouldFail() throws Exception {
 
         var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
 
@@ -90,7 +90,7 @@ class CustomerControllerTest {
 
     @Test
     @DisplayName("Não deve cadastrar um cliente com e-mail duplicado")
-    public void testCreateWithDuplicatedEmailShouldFail() throws Exception {
+    void testCreateWithDuplicatedEmailShouldFail() throws Exception {
 
         var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
 
@@ -119,7 +119,7 @@ class CustomerControllerTest {
 
     @Test
     @DisplayName("Deve obter um cliente por id")
-    public void testGet() throws Exception {
+    void testGet() throws Exception {
 
         var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
 

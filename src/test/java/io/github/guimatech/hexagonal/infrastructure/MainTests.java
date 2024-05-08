@@ -10,6 +10,7 @@ class MainTests {
 
 	@Test
 	void contextLoads() {
+		// This test is used to check if the Spring context is loading correctly
 	}
 
 }

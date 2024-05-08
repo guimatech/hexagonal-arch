@@ -12,7 +12,7 @@ class GetPartnerByIdUseCaseTest {
 
     @Test
     @DisplayName("Deve obter um parceiro por id")
-    public void testGetById() {
+    void testGetById() {
         // given
         final var expectedCNPJ = "41.536.538/0001-00";
         final var expectedEmail = "john.doe@gmail.com";
@@ -40,7 +40,7 @@ class GetPartnerByIdUseCaseTest {
 
     @Test
     @DisplayName("Deve obter vazio ao tentar recuperar um parceiro não existente por id")
-    public void testGetByIdWIthInvalidId() {
+    void testGetByIdWIthInvalidId() {
         // given
         final var expectedID = UUID.randomUUID().toString();
 

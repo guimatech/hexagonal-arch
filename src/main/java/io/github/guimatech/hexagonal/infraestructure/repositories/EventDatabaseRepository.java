@@ -31,15 +31,15 @@ public class EventDatabaseRepository implements EventRepository {
 
     @Override
     @Transactional
-    public Event create(final Event Event) {
-        return this.eventJpaRepository.save(EventEntity.of(Event))
+    public Event create(final Event event) {
+        return this.eventJpaRepository.save(EventEntity.of(event))
                 .toEvent();
     }
 
     @Override
     @Transactional
-    public Event update(Event Event) {
-        return this.eventJpaRepository.save(EventEntity.of(Event))
+    public Event update(Event event) {
+        return this.eventJpaRepository.save(EventEntity.of(event))
                 .toEvent();
     }
 
