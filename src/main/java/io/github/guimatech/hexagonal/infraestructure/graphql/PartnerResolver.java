@@ -1,8 +1,8 @@
 package io.github.guimatech.hexagonal.infraestructure.graphql;
 
 import io.github.guimatech.hexagonal.application.repositories.PartnerRepository;
-import io.github.guimatech.hexagonal.application.usecases.CreatePartnerUseCase;
-import io.github.guimatech.hexagonal.application.usecases.GetPartnerByIdUseCase;
+import io.github.guimatech.hexagonal.application.usecases.partner.CreatePartnerUseCase;
+import io.github.guimatech.hexagonal.application.usecases.partner.GetPartnerByIdUseCase;
 import io.github.guimatech.hexagonal.infraestructure.dtos.NewPartnerDTO;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

@@ -1,7 +1,7 @@
 package io.github.guimatech.hexagonal.infraestructure.rest;
 
-import io.github.guimatech.hexagonal.application.usecases.CreatePartnerUseCase;
-import io.github.guimatech.hexagonal.application.usecases.GetPartnerByIdUseCase;
+import io.github.guimatech.hexagonal.application.usecases.partner.CreatePartnerUseCase;
+import io.github.guimatech.hexagonal.application.usecases.partner.GetPartnerByIdUseCase;
 import io.github.guimatech.hexagonal.infraestructure.dtos.NewPartnerDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

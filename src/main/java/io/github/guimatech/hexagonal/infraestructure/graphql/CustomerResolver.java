@@ -1,7 +1,7 @@
 package io.github.guimatech.hexagonal.infraestructure.graphql;
 
-import io.github.guimatech.hexagonal.application.usecases.CreateCustomerUseCase;
-import io.github.guimatech.hexagonal.application.usecases.GetCustomerByIdUseCase;
+import io.github.guimatech.hexagonal.application.usecases.customer.CreateCustomerUseCase;
+import io.github.guimatech.hexagonal.application.usecases.customer.GetCustomerByIdUseCase;
 import io.github.guimatech.hexagonal.infraestructure.dtos.NewCustomerDTO;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

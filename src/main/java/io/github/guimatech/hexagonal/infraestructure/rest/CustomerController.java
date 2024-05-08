@@ -1,7 +1,7 @@
 package io.github.guimatech.hexagonal.infraestructure.rest;
 
-import io.github.guimatech.hexagonal.application.usecases.CreateCustomerUseCase;
-import io.github.guimatech.hexagonal.application.usecases.GetCustomerByIdUseCase;
+import io.github.guimatech.hexagonal.application.usecases.customer.CreateCustomerUseCase;
+import io.github.guimatech.hexagonal.application.usecases.customer.GetCustomerByIdUseCase;
 import io.github.guimatech.hexagonal.infraestructure.dtos.NewCustomerDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
