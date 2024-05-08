@@ -1,37 +1,48 @@
 package io.github.guimatech.hexagonal.application.usecases.event;
 
-import io.github.guimatech.hexagonal.application.repository.InMemoryEventRepository;
-import io.github.guimatech.hexagonal.application.repository.InMemoryPartnerRepository;
+import io.github.guimatech.hexagonal.IntegrationTest;
 import io.github.guimatech.hexagonal.application.domain.partner.Partner;
 import io.github.guimatech.hexagonal.application.domain.partner.PartnerId;
 import io.github.guimatech.hexagonal.application.exceptions.ValidationException;
+import io.github.guimatech.hexagonal.application.repositories.EventRepository;
+import io.github.guimatech.hexagonal.application.repositories.PartnerRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-class CreateEventUseCaseTest {
+class CreateEventUseCaseIT extends IntegrationTest {
+
+    @Autowired
+    private CreateEventUseCase useCase;
+
+    @Autowired
+    private EventRepository eventRepository;
+
+    @Autowired
+    private PartnerRepository partnerRepository;
+
+    @BeforeEach
+    void setUp() {
+        eventRepository.deleteAll();
+        partnerRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("Deve criar um evento")
     public void testCreate() throws Exception {
         // given
-        final var aPartner =
-                Partner.newPartner("John Doe", "41.536.538/0001-00", "john.doe@gmail.com");
+        final var partner = createPartner("41.536.538/0001-00", "john.doe@gmail.com", "John Doe");
         final var expectedDate = "2021-01-01";
         final var expectedName = "Disney on Ice";
         final var expectedTotalSpots = 10;
-        final var expectedPartnerId = aPartner.partnerId().value();
+        final var expectedPartnerId = partner.partnerId().value();
 
         final var createInput =
                 new CreateEventUseCase.Input(expectedDate, expectedName, expectedPartnerId, expectedTotalSpots);
 
-        final var eventRepository = new InMemoryEventRepository();
-        final var partnerRepository = new InMemoryPartnerRepository();
-
-        partnerRepository.create(aPartner);
-
         // when
-        final var useCase = new CreateEventUseCase(eventRepository, partnerRepository);
         final var output = useCase.execute(createInput);
 
         // then
@@ -55,14 +66,14 @@ class CreateEventUseCaseTest {
         final var createInput =
                 new CreateEventUseCase.Input(expectedDate, expectedName, expectedPartnerId, expectedTotalSpots);
 
-        final var eventRepository = new InMemoryEventRepository();
-        final var partnerRepository = new InMemoryPartnerRepository();
-
         // when
-        final var useCase = new CreateEventUseCase(eventRepository, partnerRepository);
         final var actualException = Assertions.assertThrows(ValidationException.class, () -> useCase.execute(createInput));
 
         // then
         Assertions.assertEquals(expectedError, actualException.getMessage());
+    }
+
+    private Partner createPartner(final String cnpj, final String email, final String name) {
+        return partnerRepository.create(Partner.newPartner(name, cnpj, email));
     }
 }

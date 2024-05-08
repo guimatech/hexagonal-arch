@@ -41,7 +41,7 @@ class CustomerControllerTest {
     @DisplayName("Deve criar um cliente")
     public void testCreate() throws Exception {
 
-        var customer = new NewCustomerDTO("123.456.789-01", "john.doe@gmail.com", "John Doe");
+        var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
 
         final var result = this.mvc.perform(
                         MockMvcRequestBuilders.post("/customers")
@@ -63,7 +63,7 @@ class CustomerControllerTest {
     @DisplayName("Não deve cadastrar um cliente com CPF duplicado")
     public void testCreateWithDuplicatedCPFShouldFail() throws Exception {
 
-        var customer = new NewCustomerDTO("123.456.789-01", "john.doe@gmail.com", "John Doe");
+        var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
 
         // Cria o primeiro cliente
         this.mvc.perform(
@@ -76,7 +76,7 @@ class CustomerControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isString())
                 .andReturn().getResponse().getContentAsByteArray();
 
-        customer = new NewCustomerDTO("123.456.789-01", "john2@gmail.com", "John Doe");
+        customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john2@gmail.com");
 
         // Tenta criar o segundo cliente com o mesmo CPF
         this.mvc.perform(
@@ -92,7 +92,7 @@ class CustomerControllerTest {
     @DisplayName("Não deve cadastrar um cliente com e-mail duplicado")
     public void testCreateWithDuplicatedEmailShouldFail() throws Exception {
 
-        var customer = new NewCustomerDTO("123.456.789-01", "john.doe@gmail.com", "John Doe");
+        var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
 
         // Cria o primeiro cliente
         this.mvc.perform(
@@ -105,7 +105,7 @@ class CustomerControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isString())
                 .andReturn().getResponse().getContentAsByteArray();
 
-        customer = new NewCustomerDTO("999.999.189-01", "john.doe@gmail.com", "John Doe");
+        customer = new NewCustomerDTO("John Doe", "999.999.189-01", "john.doe@gmail.com");
 
         // Tenta criar o segundo cliente com o mesmo CPF
         this.mvc.perform(
@@ -121,7 +121,7 @@ class CustomerControllerTest {
     @DisplayName("Deve obter um cliente por id")
     public void testGet() throws Exception {
 
-        var customer = new NewCustomerDTO("123.456.789-01", "john.doe@gmail.com", "John Doe");
+        var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
 
         final var createResult = this.mvc.perform(
                         MockMvcRequestBuilders.post("/customers")

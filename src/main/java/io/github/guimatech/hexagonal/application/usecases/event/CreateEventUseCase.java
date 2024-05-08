@@ -25,7 +25,7 @@ public class CreateEventUseCase
                 .orElseThrow(() -> new ValidationException("Partner not found"));
 
         final var anEvent =
-                eventRepository.create(Event.newEvent(input.date(), input.name(), input.totalSpots(), aPartner));
+                eventRepository.create(Event.newEvent(input.name(), input.date(), input.totalSpots(), aPartner));
 
         return new Output(
                 anEvent.eventId().value(),
