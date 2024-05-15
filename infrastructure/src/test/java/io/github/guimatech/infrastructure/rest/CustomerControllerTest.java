@@ -144,4 +144,29 @@ class CustomerControllerTest {
         Assertions.assertEquals(customer.cpf(), actualResponse.cpf());
         Assertions.assertEquals(customer.email(), actualResponse.email());
     }
+
+    @Test
+    @DisplayName("Deve obter um cliente por id com X-Public")
+    void testGetPublic() throws Exception {
+
+        var customer = new NewCustomerDTO("John Doe", "123.456.789-01", "john.doe@gmail.com");
+
+        final var createResult = this.mvc.perform(
+                        MockMvcRequestBuilders.post("/customers")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(customer))
+                )
+                .andReturn().getResponse().getContentAsByteArray();
+
+        var customerId = mapper.readValue(createResult, CreateCustomerUseCase.Output.class).id();
+
+        final var actualResponse = this.mvc.perform(
+                        MockMvcRequestBuilders.get("/customers/{id}", customerId)
+                                .header("X-Public", "true")
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        Assertions.assertEquals(customerId, actualResponse);
+    }
 }
