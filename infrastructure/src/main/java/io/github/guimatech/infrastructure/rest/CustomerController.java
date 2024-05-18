@@ -4,8 +4,6 @@ import io.github.guimatech.application.Presenter;
 import io.github.guimatech.application.customer.CreateCustomerUseCase;
 import io.github.guimatech.application.customer.GetCustomerByIdUseCase;
 import io.github.guimatech.infrastructure.dtos.NewCustomerDTO;
-import io.github.guimatech.infrastructure.rest.presenters.GetCustomerByIdResponseEntity;
-import io.github.guimatech.infrastructure.rest.presenters.PublicGetCustomerByIdString;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
