@@ -21,18 +21,15 @@ public class UseCaseConfig {
     private final CustomerRepository customerRepository;
     private final EventRepository eventRepository;
     private final PartnerRepository partnerRepository;
-    private final TicketRepository ticketRepository;
 
     public UseCaseConfig(
             final CustomerRepository customerRepository,
             final EventRepository eventRepository,
-            final PartnerRepository partnerRepository,
-            final TicketRepository ticketRepository
+            final PartnerRepository partnerRepository
     ) {
         this.customerRepository = Objects.requireNonNull(customerRepository);
         this.eventRepository = Objects.requireNonNull(eventRepository);
         this.partnerRepository = Objects.requireNonNull(partnerRepository);
-        this.ticketRepository = Objects.requireNonNull(ticketRepository);
     }
 
     @Bean
@@ -62,6 +59,6 @@ public class UseCaseConfig {
 
     @Bean
     public SubscribeCustomerToEventUseCase subscribeCustomerToEventUseCase() {
-        return new SubscribeCustomerToEventUseCase(customerRepository, eventRepository, ticketRepository);
+        return new SubscribeCustomerToEventUseCase(customerRepository, eventRepository);
     }
 }
