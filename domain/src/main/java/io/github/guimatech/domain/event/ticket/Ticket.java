@@ -1,15 +1,22 @@
 package io.github.guimatech.domain.event.ticket;
 
+import io.github.guimatech.domain.DomainEvent;
 import io.github.guimatech.domain.customer.CustomerId;
 import io.github.guimatech.domain.event.EventId;
+import io.github.guimatech.domain.event.EventTicketId;
 import io.github.guimatech.domain.exceptions.ValidationException;
 
 import java.time.Instant;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Ticket {
 
     private final TicketId ticketId;
+    private final Set<DomainEvent> domainEvents;
+
     private CustomerId customerId;
     private EventId eventId;
     private TicketStatus status;
@@ -25,6 +32,7 @@ public class Ticket {
             final Instant reservedAt
     ) {
         this.ticketId = ticketId;
+        this.domainEvents = new HashSet<>();
         this.setCustomerId(customerId);
         this.setEventId(eventId);
         this.setStatus(status);
@@ -34,6 +42,12 @@ public class Ticket {
 
     public static Ticket newTicket(final CustomerId customerId, final EventId eventId) {
         return new Ticket(TicketId.unique(), customerId, eventId, TicketStatus.PENDING, null, Instant.now());
+    }
+
+    public static Ticket newTicket(final EventTicketId eventTicketId, final CustomerId customerId, final EventId eventId) {
+        final var aTicket = newTicket(customerId, eventId);
+        aTicket.domainEvents.add(new TicketCreated(aTicket.ticketId, eventTicketId, eventId, customerId));
+        return aTicket;
     }
 
     public TicketId ticketId() {
@@ -58,6 +72,10 @@ public class Ticket {
 
     public Instant reservedAt() {
         return reservedAt;
+    }
+
+    public Set<DomainEvent> allDomainEvents() {
+        return Collections.unmodifiableSet(domainEvents);
     }
 
     @Override

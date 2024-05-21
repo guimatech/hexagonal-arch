@@ -6,6 +6,7 @@ import io.github.guimatech.application.event.CreateEventUseCase;
 import io.github.guimatech.application.event.SubscribeCustomerToEventUseCase;
 import io.github.guimatech.application.partner.CreatePartnerUseCase;
 import io.github.guimatech.application.partner.GetPartnerByIdUseCase;
+import io.github.guimatech.application.ticket.CreateTicketForCustomerUseCase;
 import io.github.guimatech.domain.customer.CustomerRepository;
 import io.github.guimatech.domain.event.EventRepository;
 import io.github.guimatech.domain.event.ticket.TicketRepository;
@@ -21,15 +22,18 @@ public class UseCaseConfig {
     private final CustomerRepository customerRepository;
     private final EventRepository eventRepository;
     private final PartnerRepository partnerRepository;
+    private final TicketRepository ticketRepository;
 
     public UseCaseConfig(
             final CustomerRepository customerRepository,
             final EventRepository eventRepository,
-            final PartnerRepository partnerRepository
+            final PartnerRepository partnerRepository,
+            final TicketRepository ticketRepository
     ) {
         this.customerRepository = Objects.requireNonNull(customerRepository);
         this.eventRepository = Objects.requireNonNull(eventRepository);
         this.partnerRepository = Objects.requireNonNull(partnerRepository);
+        this.ticketRepository = Objects.requireNonNull(ticketRepository);
     }
 
     @Bean
@@ -60,5 +64,10 @@ public class UseCaseConfig {
     @Bean
     public SubscribeCustomerToEventUseCase subscribeCustomerToEventUseCase() {
         return new SubscribeCustomerToEventUseCase(customerRepository, eventRepository);
+    }
+
+    @Bean
+    public CreateTicketForCustomerUseCase createTicketForCustomerUseCase() {
+        return new CreateTicketForCustomerUseCase(ticketRepository);
     }
 }

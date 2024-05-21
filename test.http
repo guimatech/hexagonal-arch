@@ -1,0 +1,41 @@
+### Create a customer
+POST http://localhost:8080/customers
+content-type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@gmail.com",
+  "cpf": "123.456.789-01"
+}
+
+### Create a partner
+
+POST http://localhost:8080/partners
+content-type: application/json
+
+{
+  "name": "Disney",
+  "email": "eventos@disney.com",
+  "cnpj": "12.345.678/9012-34"
+}
+
+### Create a event
+
+POST http://localhost:8080/events
+content-type: application/json
+
+{
+  "name": "Disney on Ice",
+  "date": "2021-12-25",
+  "totalSpots": 2,
+  "partnerId": "0da10cd1-77b7-4f94-b0cb-f20960f70e53"
+}
+
+### Create a subscription
+
+POST http://localhost:8080/events/52353e8e-06ee-4228-bf4f-69682ad6580c/subscribe
+content-type: application/json
+
+{
+  "customerId": "c014ff63-177b-4f78-85d3-1693d67c3241"
+}
